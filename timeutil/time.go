@@ -26,8 +26,17 @@ func FormatDB(t time.Time) string {
 }
 
 // ParseDBDatetime はDBフォーマット文字列を`time.Time`に変換する
-func ParseDBDatetime(dbTimestamp string) time.Time {
+func ParseDBDatetime(dbTimestamp string) (time.Time, error) {
 	t, err := time.ParseInLocation(dbDatetimeFormat, dbTimestamp, time.Local)
+	if err != nil {
+		return time.Time{}, err
+	}
+	return t, nil
+}
+
+// MustParseDBDatetime はDBフォーマット文字列を`time.Time`に変換する
+func MustParseDBDatetime(dbTimestamp string) time.Time {
+	t, err := ParseDBDatetime(dbDatetimeFormat)
 	if err != nil {
 		panic(err)
 	}
