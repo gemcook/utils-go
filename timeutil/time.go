@@ -36,7 +36,7 @@ func ParseDBDatetime(dbTimestamp string) (time.Time, error) {
 
 // MustParseDBDatetime はDBフォーマット文字列を`time.Time`に変換する
 func MustParseDBDatetime(dbTimestamp string) time.Time {
-	t, err := ParseDBDatetime(dbDatetimeFormat)
+	t, err := ParseDBDatetime(dbTimestamp)
 	if err != nil {
 		panic(err)
 	}
